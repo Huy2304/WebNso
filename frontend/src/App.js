@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-const SERVER = "http://localhost:3000";
+const SERVER = "https://webnso.onrender.com";
 const socket = io(SERVER);
 
 function App() {
