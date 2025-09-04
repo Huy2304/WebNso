@@ -7,7 +7,7 @@ const path = require("path");
 
 const app = express();
 app.use(cors({
-    origin: ["https://webnso.vercel.app", "http://localhost:5173"],
+    origin: ["https://webnso.vercel.app", "https://toolnso.click"],
     methods: ["GET", "POST"],
 }));
 app.use(express.json({ limit: "1mb" }));
@@ -19,6 +19,11 @@ function q(clientId) {
     if (!cmdQueues.has(clientId)) cmdQueues.set(clientId, []);
     return cmdQueues.get(clientId);
 }
+
+app.get("/", (req, res) => {
+    res.send("✅ Server is running!");
+});
+
 
 // ====== API: Register client ======
 app.get("/api/register", (req, res) => {
@@ -90,7 +95,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: ["https://webnso.vercel.app", "http://localhost:5173"],
+        origin: ["https://webnso.vercel.app", "https://toolnso.click"],
         methods: ["GET", "POST"],
         credentials: true
     }
