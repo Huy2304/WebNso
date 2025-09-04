@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import API_URL from "./config";
 
-const SERVER = "https://webnso.onrender.com";
-const socket = io(SERVER);
+const socket = io(API_URL, { transports: ["websocket"] });
 
 function App() {
     const [clients, setClients] = useState([]); // [{clientId, data}, ...]

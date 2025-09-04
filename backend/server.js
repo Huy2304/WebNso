@@ -6,7 +6,10 @@ const { spawn } = require("child_process");
 const path = require("path");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: ["https://webnso.vercel.app", "http://localhost:5173"],
+    methods: ["GET", "POST"],
+}));
 app.use(express.json({ limit: "1mb" }));
 
 const store = { events: [] };
