@@ -87,8 +87,23 @@ app.get("/health", (req, res) => res.send("oke"));
 
 // ====== Socket.IO ======
 const server = http.createServer(app);
-const io = new Server(server, { cors: { origin: "*" } });
-io.on("connection", () => console.log("FE connected"));
+
+const io = new Server(server, {
+    cors: {
+        origin: ["https://webnso.vercel.app", "http://localhost:5173"],
+        methods: ["GET", "POST"],
+        credentials: true
+    }
+});
+
+io.on("connection", (socket) => {
+    console.log("FE connected:", socket.id);
+
+    socket.on("disconnect", (reason) => {
+        console.log("FE disconnected:", socket.id, "Reason:", reason);
+    });
+});
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log("Server listening on port", PORT));
+
